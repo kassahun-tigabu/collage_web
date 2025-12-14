@@ -1,0 +1,12 @@
+// Example: Simple scroll animation
+document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.hover-effect');
+    cards.forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.style.transform = "scale(1.05)";
+        });
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = "scale(1)";
+        });
+    });
+});

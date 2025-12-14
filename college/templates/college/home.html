@@ -1,7 +1,45 @@
-<h1>Welcome to {{ announcements.0.college.name }}</h1>
-<h2>Latest Announcements</h2>
-<ul>
-  {% for ann in announcements %}
-    <li>{{ ann.published_date }} - {{ ann.title }}</li>
-  {% endfor %}
-</ul>
+{% extends 'college/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="text-center mb-4">
+    <h1>Welcome to College of Science</h1>
+    <p class="lead">Explore Departments, Programs, Courses, Staff, and Students</p>
+</div>
+
+<!-- Announcements Carousel -->
+<div id="announcementCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+    <div class="carousel-inner">
+        {% for ann in announcements %}
+        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+            <div class="card bg-light text-dark p-4">
+                <h5>{{ ann.title }}</h5>
+                <p>{{ ann.content|truncatewords:30 }}</p>
+                <small class="text-muted">{{ ann.published_date }}</small>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#announcementCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#announcementCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+    </button>
+</div>
+
+<!-- Department Cards -->
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for dept in departments %}
+    <div class="col">
+        <div class="card h-100 shadow-sm hover-effect">
+            <div class="card-body">
+                <h5 class="card-title">{{ dept.name }}</h5>
+                <p class="card-text">{{ dept.description|truncatewords:20 }}</p>
+                <a href="{% url 'programs' %}" class="btn btn-primary btn-sm">View Programs</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -33,3 +33,14 @@ def staff_list(request):
 def student_list(request):
     students = Student.objects.all()
     return render(request, 'college/students.html', {'students': students})
+
+
+# To Connect Departments to Home Page
+
+def home(request):
+    announcements = Announcement.objects.all().order_by('-published_date')[:5]
+    departments = Department.objects.all()  # For interactive cards
+    return render(request, 'college/home.html', {
+        'announcements': announcements,
+        'departments': departments
+    })
