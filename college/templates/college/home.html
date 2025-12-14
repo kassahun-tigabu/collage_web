@@ -1,0 +1,7 @@
+<h1>Welcome to {{ announcements.0.college.name }}</h1>
+<h2>Latest Announcements</h2>
+<ul>
+  {% for ann in announcements %}
+    <li>{{ ann.published_date }} - {{ ann.title }}</li>
+  {% endfor %}
+</ul>
